@@ -1,0 +1,20 @@
+<div class="container-fluid container p-3  bg-dark-subtle" style="width: 780px;">
+    <div class="row"  *ngIf="response">
+        <app-form-article 
+        (onFormGroupChange)="addArticle($event)"  
+        (onSearchElement)="searchFournisseur($event)"
+        (newArticleName)="searchArticle($event)"
+        [fournisseurs]="fournisseur$|async" 
+            [total]="response.data.total!"  
+            [categories]="response.data.categorie!" 
+                >
+            </app-form-article>
+            <app-list-article
+            [articles]=" articles " 
+            
+            ></app-list-article> 
+            <app-pagination  [links]="response.data.article.links" (newPageEvent)="changePage($event)"></app-pagination> 
+        </div>
+    </div>
+    <!-- (dataArticle)="handleUpdate($event, formArticle)"  -->
+    <!-- (deletedArticle)="handleDelete($event)" -->

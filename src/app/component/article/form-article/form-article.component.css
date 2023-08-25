@@ -1,0 +1,25 @@
+.list-fournisseur{
+    visibility: hidden;
+    transition: opacity .8s linear;
+}
+.list-fournisseur.active{
+    visibility: visible;
+}
+.text{
+    width: 110px;
+
+}
+
+.item_fourni.active{
+    animation: floating 1.5s ease ;
+}
+
+@keyframes floating {
+    to {
+        transform: translateY(50px);
+        display: none;
+    }
+    from{
+        transform: translate(0,0);
+    }
+}

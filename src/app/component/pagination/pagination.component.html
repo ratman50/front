@@ -1,0 +1,7 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" *ngFor="let link of links">
+        <button class="page-link" [disabled]="!link.url" (click)="newPage(link.url)" [innerHTML]="link.label"></button>
+    </li>
+    </ul>
+</nav>
