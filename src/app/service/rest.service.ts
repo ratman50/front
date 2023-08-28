@@ -23,7 +23,7 @@ export  abstract class RestService<T> {
   }
   store(element:T):Observable<Response<T>>{
     
-    return this._http.post<Response<T>>(`${environment.url}/${this.uri}`,{element},
+    return this._http.post<Response<T>>(`${environment.url}/${this.uri()}`,{...element},
     {headers:{
       "Accept":"Application/json",
       "Content-type":"Application/json"
@@ -32,7 +32,7 @@ export  abstract class RestService<T> {
   }
    update(element:T):Observable<Response<T>>{
     
-    return this._http.put<Response<T>>(`${environment.url}/${this.uri}`,{element},
+    return this._http.put<Response<T>>(`${environment.url}/${this.uri()}`,{element},
     {headers:{
       "Accept":"Application/json",
       "Content-type":"Application/json"
@@ -40,15 +40,15 @@ export  abstract class RestService<T> {
     }});
   }
   delete(id:string){
-    return this._http.delete(`${environment.url}/${this.uri}/${id}`,{headers:{
+    return this._http.delete(`${environment.url}/${this.uri()}/${id}`,{headers:{
       "Accept":"Application/json",
       "Content-type":"Application/json"
 
     }});
   }
-  show(libelle:string):Observable<ResponseData<Response<Categorie>>>{
+  show(libelle:string):Observable<Response<T[]>>{
 
-    return this._http.get<ResponseData<Response<Categorie>>>(`${environment.url}/categorie/${libelle}`);
+    return this._http.get<Response<T[]>>(`${environment.url}/${this.uri()}/${libelle}`);
   }
 
 

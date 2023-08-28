@@ -1,0 +1,157 @@
+<form [formGroup]="VenteForm"  (ngSubmit)="onSubmit()" >
+    <div class="row">
+    <div class="col-7 ">
+        <div class="row "   >
+            <div class="col-6">
+
+                <div class="input-group mb-3 mt-3 position-relative ">
+                    <div class="input-group-text bg-primary text">Libelle</div>
+                    <input   type="text" class="form-control " 
+                    formControlName="libelle"
+                    (input)="getVenteExist($event)"
+                    [ngClass]="{
+                        'is-invalid':libelle?.invalid && (libelle?.touched || libelle?.dirty),
+                        'is-valid':libelle?.valid && (libelle?.touched || libelle?.dirty)
+                    }" 
+
+                    name="libelle"   placeholder="ex.robe">
+                     <div class="invalid-tooltip" *ngIf="libelle?.errors?.['exist']">
+                        this libelle already exists
+                    </div> 
+                    <div class="invalid-tooltip" *ngIf="libelle?.errors?.['minlength']">
+                        Please field libelle has minimum character to 3
+                    </div> 
+                    
+                </div>
+            </div>
+            <div class="col-6">
+
+                <div class="input-group mb-3 mt-3">
+                    <label class="input-group-text bg-primary text" for="inputGroupSelect01">Categorie</label>
+                    <select class="form-select" id="inputGroupSelect01" 
+                    name="categorie" 
+                    formControlName="categorie"
+                    [compareWith]="compareFn"
+                    (change)="handleRef()"
+                        >
+                        <option  disabled>Choose...</option>
+                    <option *ngFor="let categorie of informationForm.categorie" [ngValue]="categorie">{{categorie.libelle}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-6" >
+                <div class="input-group mb-3">
+                    <div class="input-group-text">
+                      <input class="form-check-input mt-0" type="checkbox"
+                      (change)="handlePromo($event)"
+                      value="" aria-label="Checkbox for following text input">
+                    </div>
+                    <input type="text" disabled value="promo" class="form-control" aria-label="Text input with checkbox">
+                  </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group  position-relative " 
+                [hidden]="!promoIsChecked"
+                
+                >
+                <div class="input-group-text bg-primary text">Valeur</div>
+                <input   type="number" class="form-control " 
+                formControlName="promo"
+
+                [ngClass]="{
+                    'is-invalid':promo?.invalid && (promo?.touched || promo?.dirty),
+                    'is-valid':promo?.valid && (promo?.touched || promo?.dirty)
+                }" 
+                    name="promo"   placeholder="ex.10">
+
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <div class="input-group  position-relative ">
+                    <div class="input-group-text bg-primary text">Marge</div>
+                    <input   type="number" class="form-control " 
+                    formControlName="marge"
+                    name="marge"   placeholder="ex.10"
+                    [ngClass]="{
+                        'is-invalid':marge?.invalid && (marge?.touched || marge?.dirty),
+                        'is-valid':marge?.valid && (marge?.touched || marge?.dirty)}" 
+
+                    >
+                    
+                </div>
+
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-6">
+    
+                <h2  >Liste des articles de confection</h2>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+    
+                <button 
+                (click)="addConfection()"
+                [disabled]="!checkValidity()"
+                class="btn btn-outline-primary " type="button">ajouter</button>
+            </div>
+        </div>
+        <div class="all-confections" style="height: 200px; overflow-y: scroll; overflow-x: hidden;" >
+             
+             <ng-container #container>
+
+             </ng-container>
+        </div>
+        
+        <div class="row mt-2">
+            <div class="col">
+                <h1>Cout de fabrication : <span class="bg-light rounded-1  px-3" >{{cout}}</span> </h1>
+                
+            </div>
+             <div class="col">
+                <h1>Prix de vente : <span class="bg-light px-3 rounded-1"  >{{cout + marge?.value}}</span> </h1>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-5   ">
+        <div class="row">
+            <label class="  btn btn-outline-light" style="cursor: pointer; height: 300px; width: 100%;" for="image">
+
+                    <img [src]="path?.value" width="100%" height="100%" alt="" style="object-fit: contain;">
+            </label>
+            <input type="file" name="" (change)="loadImage($event)" id="image" hidden >
+
+        </div>
+        <div class="row">
+            <input type="text" class="w-50 form-control" formControlName="reference"/>
+        </div>
+    </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row">
+
+        <tr style="width: 98%; height: 1px;box-shadow: 1px 2px 1px;" class="bg-primary m-3" ></tr>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button 
+        class="btn  px-4" 
+        style="font-size: 1.2rem; text-transform: capitalize;"
+        [disabled]="VenteForm.invalid  "
+        [ngClass]="{
+            'btn-outline-success':VenteForm.valid ,
+            'btn-outline-danger':VenteForm.invalid  
+        }"
+        >ajouter</button>
+    </div>
+
+</form>
+<div  *ngIf="informationForm.article">
+
+    <app-list-vente  [articles]="informationForm.article.data"></app-list-vente>
+    <app-pagination [links]="informationForm.article.links"></app-pagination>
+</div>

@@ -1,0 +1,46 @@
+<form  
+class="border p-1  rounded-2"
+ [formGroup]="ConfectionForm"
+ >
+    <div>
+
+        <div class="row ">
+            <div class="col-5">
+                <input type="hidden" formControlName="id" value="id.value">
+                <div class="input-group ">
+                    <span class="input-group-text text bg-primary" id="basic-addon1">libelle</span>
+                    <input type="text" list="dataListOptions+reference"
+                        #input  
+                      formControlName="libelle" 
+                      (input)="handleAutoComplete($event)" 
+                      [ngClass]="{
+                        'is-invalid':libelle?.invalid && (libelle?.touched || libelle?.dirty),
+                        'is-valid':libelle?.valid && (libelle?.touched || libelle?.dirty)}" 
+    
+                      class="form-control" placeholder="ex.tissu" aria-label="Username" aria-describedby="basic-addon1">
+                    <datalist  [id]="'dataListOptions'+reference">
+                        <option *ngFor="let  result of resultSearch" value="{{result.libelle}}">
+                    </datalist>
+                </div>
+    
+            </div>
+            <div class="col-5">
+                <div class="input-group ">
+                    <span class="input-group-text text bg-primary" id="basic-addon1">quantite</span>
+                    <input type="number" class="form-control" 
+                    [ngClass]="{
+                        'is-invalid':quantite?.invalid && (libelle?.touched || libelle?.dirty),
+                        'is-valid':quantite?.valid && (quantite?.touched || quantite?.dirty)
+    
+                        
+                    }"
+                    formControlName="quantite"  placeholder="ex.3" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+    
+            </div>
+            <div class="col-1">
+                <button type="button" class="btn btn-danger">del</button>
+            </div>
+        </div>
+    </div>
+</form>

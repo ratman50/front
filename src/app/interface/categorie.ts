@@ -1,4 +1,5 @@
 export interface Categorie {
     id:number,
-    libelle:string
+    libelle:string,
+    stock:number,
 }

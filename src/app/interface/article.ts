@@ -15,3 +15,8 @@ export interface IArticle{
     stock:number,
 
 }
+export interface IELement{
+    id?:number,
+    libelle:string,
+    quantite:number
+  }

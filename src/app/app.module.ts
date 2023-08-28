@@ -21,6 +21,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { SelectImageComponent } from './component/select-image/select-image.component';
+import { VenteComponent } from './component/vente/vente.component';
+import { ConfectionComponent } from './component/vente/confection/confection.component';
+import { ListVenteComponent } from './component/vente/list-vente/list-vente.component';
+import { FormVenteComponent } from './component/vente/form-vente/form-vente.component';
+import { ItemVenteComponent } from './component/vente/item-vente/item-vente.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +35,12 @@ import { SelectImageComponent } from './component/select-image/select-image.comp
     ListArticleComponent,
     ItemArticleComponent,
     PaginationComponent,
-    SelectImageComponent
+    SelectImageComponent,
+    VenteComponent,
+    ConfectionComponent,
+    ListVenteComponent,
+    FormVenteComponent,
+    ItemVenteComponent
   ],
   imports: [
     BrowserModule,

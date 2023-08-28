@@ -1,0 +1,9 @@
+<td>
+    {{article.libelle.toUpperCase()}}
+</td>
+<td>100</td>
+<td>
+    {{this.confections.toUpperCase()}}
+</td>
+<td><button class="btn btn-danger mx-2" style="width: 100px;" (click)="deleteArticle($event)">supprimer</button>
+    <button class="btn btn-primary mx-2" style="width: 100px;"  (click)="fillForm($event)">editer</button></td>
